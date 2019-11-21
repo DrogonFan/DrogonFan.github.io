@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>组会汇报</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<!--这里定义幻灯片-->
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>组会汇报</h1>
+					<h3>StringFuzz: A Fuzzer for String SMT Solvers</h3>
+					<p>
+						<small>CAV 2018: Computer Aided Verification pp 45-51</small>
+					</p>
+				</section>
+
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							## WHY do this?
+	
+							+ SMT求解器是复杂并且高度优化的软件系统，但是验证其正确很具有挑战性
+							+ 开发者发布的套件无法检测求解器的健全性
+	
+							## RELATED WORK
+	
+							+ FuzzSMT-只使用位向量约束和数组生成SMT实例
+							+ SMTpp-只预处理和简化现有实例并不能生成实例
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## StringFuzz组件<br>
+							
+							<p style="text-align:right">--支持字符串和正则表达式</p>
+							<p style="text-align:left">目前主流支持字符串的求解器:</p>
+							
+							+ Z3str3：使用字符理论
+							+ Z3str2：同Z3str3
+							+ CVC4：规约规则，简化字符约束
+							+ Norn：混合规则，同时使用字符理论和规约规则
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							## StringFuzz组件<br>
+							<p style="text-align:right">--支持字符串和正则表达式</p>
+
+							+ Stringfuzzg:用于生成SMT-LIB实例
+							+ Stringfuzzx:转化已有的SMT-LIB实例
+							+ Stringmerge:合并已有的SMT-LIB实例
+							+ Stringbreak:使用遗传算法生成SMT-LIB实例（花费的时间很长）
+						</textarea>
+					</section>
+				</section>
+
+				<section data-markdown>
+					## 用例使用的语言SMT-LIB
+
+					范例：
+					```SMT-LIB
+						(set-logic QF_S)
+						(declare-fun X () String)
+						(assert (= (str.++ "Hello " X) "Hello World"))
+						(check-sat)
+					```
+					输出：
+					```SMT-LIB
+						sat/unsat/unknow/timeout
+					```
+				</section>
+
+				<section data-markdown>
+					### genetic algorithm
+					![](./img/gen.png)
+				</section>
+
+				<section data-markdown>
+					### repopulation Phase
+					![](./img/rep.png)
+				</section>
+
+				<section data-markdown>
+					### culling Phase
+					![](./img/cul.png)
+
+					+ 适应度元组:(solve time[asce], answer, instance's size[des])
+					+ 最终找到运行时间最长，大小最短的实例
+				</section>
+
+				<section data-markdown>
+					### 实验结果
+					
+					![](./img/res.png)
+				</section>
+
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
