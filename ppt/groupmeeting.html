@@ -92,30 +92,117 @@
 					```
 				</section>
 
-				<section data-markdown>
-					### genetic algorithm
-					![](./img/gen.png)
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							### 七种生成策略
+							
+							![](./img/g1.png)
+	
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							### 具体实现 
+
+							![](./img/g2.png)
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+
+							![](./img/grs.png)
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							### 结果分析
+							![](./img/g3.png)
+
+							Concats-Balanced对于Z3str3非常困难，
+							通过执行跟踪发现了Z3str3没有充分的运用上下文信息，
+							导致引入了很多不必要的中间变量
+
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							### 结果分析
+							
+							除此之外，还发现了两个不同的错误
+
+							+ 通过Lengths-Long，涉及到整数理论
+							+ 通过Concats-Big，变量数目增加导致模型变大，
+							这个bug已经在请求#1147中修复
+
+						</textarea>
+					</section>
 				</section>
 
 				<section data-markdown>
-					### repopulation Phase
-					![](./img/rep.png)
+					<textarea data-template>
+						### Stringfuzzx
+
+						![](./img/t1.png)
+					</textarea>
 				</section>
 
 				<section data-markdown>
-					### culling Phase
-					![](./img/cul.png)
+					<textarea data-template>
+						### Stringmerge
 
-					+ 适应度元组:(solve time[asce], answer, instance's size[des])
-					+ 最终找到运行时间最长，大小最短的实例
+						
+					</textarea>
 				</section>
 
-				<section data-markdown>
-					### 实验结果
-					
-					![](./img/res.png)
-				</section>
+				<section>
+					<section data-markdown>
+						<textarea data-template>
+							### Stringbreak
 
+							使用遗传算法生成SMT-LIB实例
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							### genetic algorithm
+							![](./img/gen.png)
+	
+							可以将已有的实例/随机生成的实例作为种子
+						</textarea>
+					</section>
+	
+					<section data-markdown>
+						<textarea data-template>
+							### repopulation Phase
+	
+							![](./img/rep.png)
+	
+							+ 模拟植物繁殖，每个子代都是有一个父代生成
+							+ 四种策略: Teverse|Translate|add a random constraint|remove a random constraint
+						</textarea>
+					</section>
+	
+					<section data-markdown>
+						### culling Phase
+						![](./img/cul.png)
+	
+						+ 适应度元组:(solve time[asce], answer, instance's size[des])
+						+ 最终找到运行时间最长，大小最短的实例
+					</section>
+	
+					<section data-markdown>
+						### 实验结果
+						
+						![](./img/res.png)
+					</section>
+	
+				</section>
 			</div>
 		</div>
 
