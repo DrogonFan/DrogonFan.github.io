@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -12,6 +13,12 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<style type="text/css">
+			.alignright { 
+				float: right; 
+			} 
+		</style>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -27,6 +34,7 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
+					<img src = "./img/oscar.png" display= "inline">
 					<h1>组会汇报</h1>
 					<h3>StringFuzz: A Fuzzer for String SMT Solvers</h3>
 					<p>
@@ -94,6 +102,17 @@
 
 				<section>
 					<section data-markdown>
+							<textarea data-template>
+								### Stringfuzzg
+
+								+ 使用抽象语法树构建SMT-LIB实例
+								+ 定义了55种节点
+								+ 支持三种SMT-LIB版本，
+		
+							</textarea>
+						</section>
+
+					<section data-markdown>
 						<textarea data-template>
 							### 七种生成策略
 							
@@ -107,6 +126,14 @@
 							### 具体实现 
 
 							![](./img/g2.png)
+						</textarea>
+					</section>
+
+					<section data-markdown>
+						<textarea data-template>
+							![5](./img/g5.png)
+
+							![6](./img/g5.png)
 						</textarea>
 					</section>
 
@@ -136,7 +163,8 @@
 							除此之外，还发现了两个不同的错误
 
 							+ 通过Lengths-Long，涉及到整数理论
-							+ 通过Concats-Big，变量数目增加导致模型变大，
+							+ 通过Concats-Big，变量数目增加导致模型变大
+							<br>
 							这个bug已经在请求#1147中修复
 
 						</textarea>
@@ -155,7 +183,9 @@
 					<textarea data-template>
 						### Stringmerge
 
-						
+						+ Concat 将输入的两个文件直接串联起来，删除重复语句
+						+ Disjoint 策略与Concat相同，但是会重命名每个变量
+						+ Intersect 建立一个名称池，使用名称池中的变量名命名变量
 					</textarea>
 				</section>
 
@@ -201,7 +231,21 @@
 						
 						![](./img/res.png)
 					</section>
+
+					<section data-markdown>
+						![](./img/b1.png)
+					</section>
 	
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						### 存在的问题
+
+						+ 目前模糊测试并不能解决健全性问题，因为构建出的实例并不知道是否是正确的，也就无法检测求解器返回的结果是否是正确的
+						+ 在另外一篇文章(Automatically Testing String Solvers)中，提出了一种严格的理论要求，来构建可满足/不可满足的测试实例
+						
+					</textarea>
 				</section>
 			</div>
 		</div>
